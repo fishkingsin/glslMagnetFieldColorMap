@@ -10,7 +10,7 @@
 //#define ParallaxScrolling_StackParticle_h
 //#include "WarpGlobal.h"
 //#include "StackObject.h"
-#include "MSAPerlin.h"
+//#include "MSAPerlin.h"
 #include "ofMain.h"
 
 #include "ofxTween.h"
@@ -63,7 +63,7 @@ public:
         billboards.setUsage( GL_DYNAMIC_DRAW );
         billboards.setMode(OF_PRIMITIVE_POINTS);
         
-        perlin = new MSA::Perlin();
+//        perlin = new MSA::Perlin();
 		
         ofEnableAlphaBlending();
         
@@ -168,7 +168,7 @@ public:
             {
 				if(age[p]>0)
 				{
-                    float angle = perlin->get(pos[p].x,pos[p].y,ofGetElapsedTimef()) * noiseStrength;
+                    float angle = ofSignedNoise(pos[p].x,pos[p].y,ofGetElapsedTimef()) * noiseStrength;
                     
                     per[p].x = sin(angle) * stepSize[p] * age[p]* 0.01 ;
                     per[p].y = sin(angle) * stepSize[p] * age[p]* 0.01 ;
@@ -319,7 +319,7 @@ private:
 	
 	//bool isDrawMeah;
 	int currentIndex;
-    MSA::Perlin *perlin;
+//    MSA::Perlin *perlin;
 	//    ofxGlow glow;
 	//    ofxBlur blur;
     //ofFbo fbo;

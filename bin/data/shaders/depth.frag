@@ -41,7 +41,7 @@ varying vec4 newVertexPos;
 
 uniform int maxHeight;
 uniform int mode;
-
+uniform float iGlobalTime;
 void main (void)
 {
 	//use the color from the image, but use the r channel of the mask as the alpha channel of our output
@@ -57,6 +57,9 @@ void main (void)
 	int b = 1;
 	if(mode==0)
 	{
+        grayscale =grayscale+sin(iGlobalTime);
+        if(grayscale < 0.0) grayscale = 1.0-grayscale;
+        if(grayscale > 1.0) grayscale = grayscale-1.0;
 		if(grayscale<0.125) halfTone = 0.0;
 		else if(grayscale>0.125 && grayscale<0.25) halfTone = 1.0;
 		else if(grayscale>0.25 && grayscale<0.375) halfTone = 0.0;
@@ -112,6 +115,20 @@ void main (void)
 		else if(grayscale>0.75 && grayscale<0.875) color = c7;
 		else if(grayscale>0.875 && grayscale < 1.0) color = c8;
 		else color = c9;
+		gl_FragData[0] = vec4(color, alpha);
+	}
+    else if (mode==3)
+	{
+		vec3 color = vec3(sin(grayscale),sin(grayscale),sin(grayscale));
+//		if(grayscale<0.125) color = c1;
+//		else if(grayscale>0.125 && grayscale<0.25) color = c2;
+//		else if(grayscale>0.25 && grayscale<0.375) color = c3;
+//		else if(grayscale>0.375 && grayscale<0.5) color = c4;
+//		else if(grayscale>0.5 && grayscale<0.625) color = c5;
+//		else if(grayscale>0.625 && grayscale<0.75) color = c6;
+//		else if(grayscale>0.75 && grayscale<0.875) color = c7;
+//		else if(grayscale>0.875 && grayscale < 1.0) color = c8;
+//		else color = c9;
 		gl_FragData[0] = vec4(color, alpha);
 	}
 	

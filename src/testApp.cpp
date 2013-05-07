@@ -85,7 +85,7 @@ void testApp::setup(){
     
     gui.add(maxHeight.setup("MAX_HEIGHT", ofxParameter<float>(),0,100));
     gui.add(enableShader.setup("ENABLE_SHADER", ofxParameter<bool>()));
-	gui.add(mode.setup("SHADER_MODE", ofxParameter<int>(),0,4));
+	gui.add(mode.setup("SHADER_MODE", ofxParameter<int>(),0,5));
 	gui.add(enableCamera.setup("ENABLE_CAMERA", ofxParameter<bool>()));
 	gui.add(enableRipple.setup("ENABLE_RIPPLE", ofxParameter<bool>()));
 	gui.add(enableParticle.setup("ENABLE_PARTICLE", ofxParameter<bool>()));
@@ -145,6 +145,7 @@ void testApp::draw(){
 		shader.begin();
 		shader.setUniform1i("maxHeight",maxHeight);
 		shader.setUniform1i("mode",mode);
+            shader.setUniform1f("iGlobalTime", ofGetElapsedTimef());
 		for(int i =0 ; i< 9 ;i ++)
 		{
 			ofColor c = ofColor::fromHex(color[i]*255*255*255);
