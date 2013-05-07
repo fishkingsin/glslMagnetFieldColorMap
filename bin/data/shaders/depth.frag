@@ -57,9 +57,10 @@ void main (void)
 	int b = 1;
 	if(mode==0)
 	{
-        grayscale =grayscale+sin(iGlobalTime);
+        grayscale =grayscale+sin(iGlobalTime)+0.5;
         if(grayscale < 0.0) grayscale = 1.0-grayscale;
-        if(grayscale > 1.0) grayscale = grayscale-1.0;
+        else if(grayscale > 1.0)
+            grayscale = grayscale-sin(iGlobalTime);
 		if(grayscale<0.125) halfTone = 0.0;
 		else if(grayscale>0.125 && grayscale<0.25) halfTone = 1.0;
 		else if(grayscale>0.25 && grayscale<0.375) halfTone = 0.0;
