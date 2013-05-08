@@ -5,7 +5,7 @@ uniform sampler2DRect tex;
 varying vec2  TexCoord;
 uniform int maxHeight;
 varying vec4 newVertexPos;
-
+varying float displace;
 vec4 texture2D_bilinear(  sampler2DRect tex, vec2 uv )
 {
 	vec2 f = fract( uv.xy * textureSize );
@@ -20,7 +20,7 @@ vec4 texture2D_bilinear(  sampler2DRect tex, vec2 uv )
 
 void main(void)
 {
-	vec4 newVertexPos;
+	
 	vec4 dv;
 	float df;
 	
@@ -30,7 +30,7 @@ void main(void)
 	
 	df = 0.30*dv.x + 0.59*dv.y + 0.11*dv.z;
 	
-	newVertexPos = vec4(gl_Normal * df * float(maxHeight), 0.0) + gl_Vertex;
+	newVertexPos = vec4(gl_Normal * df * float(maxHeight), 0.0) + gl_Vertex+displace;
 	
 	gl_Position = gl_ModelViewProjectionMatrix * newVertexPos;
 }
