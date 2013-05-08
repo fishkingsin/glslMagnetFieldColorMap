@@ -5,7 +5,7 @@ uniform sampler2DRect tex;
 varying vec2  TexCoord;
 uniform int maxHeight;
 varying vec4 newVertexPos;
-varying float displace;
+varying vec4 displace;
 vec4 texture2D_bilinear(  sampler2DRect tex, vec2 uv )
 {
 	vec2 f = fract( uv.xy * textureSize );

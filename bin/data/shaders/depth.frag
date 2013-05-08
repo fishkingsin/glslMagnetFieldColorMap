@@ -98,7 +98,7 @@ varying vec4 newVertexPos;
 uniform int maxHeight;
 uniform int mode;
 uniform float iGlobalTime;
-float displace ;
+varying float displace ;
 void main (void)
 {
 	//use the color from the image, but use the r channel of the mask as the alpha channel of our output
@@ -178,8 +178,9 @@ void main (void)
 	}
     else if (mode==3)
 	{
-        displace = fbm(mTex.rgb*_NoiseFreq + _NoiseAnim*iGlobalTime);
-		vec4 c = gradient(grayscale+displace);
+        float _displace = fbm(mTex.rgb*_NoiseFreq + _NoiseAnim*iGlobalTime);
+//        displace = _displace;
+		vec4 c = gradient(grayscale+_displace);
 		gl_FragData[0] = vec4(c.rgb, alpha);
 	}
 	
